@@ -38,7 +38,7 @@ export const registerController= async (req,res)=>{
         const hashedPassword = await hashPassword(password);
 
         // creating new user
-        const userDoc = await userModel({
+        const user = await userModel({
             name,
             email,
             phone,
@@ -49,7 +49,7 @@ export const registerController= async (req,res)=>{
         res.status(201).send({
             success : true,
             message : 'REGISTRATION SUCCESSFULLY',
-            userDoc,
+            user,
         });
 
     } catch (error) {
@@ -114,4 +114,11 @@ export const loginController = async (req,res)=>{
             error
         });
     }
+}
+
+export const testController = async(req,res)=>{
+    res.send({
+        success:true,
+        message:"Path Protected",
+    })
 }
