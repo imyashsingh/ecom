@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import { FaCartShopping } from "react-icons/fa6";
+
 const Header = () => {
     return (
         <>
@@ -21,7 +23,10 @@ const Header = () => {
                         className="collapse navbar-collapse"
                         id="navbarTogglerDemo01"
                     >
-                        <NavLink to="/" className="navbar-brand">
+                        <NavLink to="/" className="navbar-brand navbar-nav">
+                            <div style={{ paddingRight: "10px" }}>
+                                <FaCartShopping />
+                            </div>
                             Ecom
                         </NavLink>
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
