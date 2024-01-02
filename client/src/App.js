@@ -8,6 +8,8 @@ import Policy from "./pages/Policy";
 import PageNotFound from "./pages/PageNotFound";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
+import Dashboard from "./pages/user/Dashboard";
+import Private from "./components/Routes/Private";
 
 function App() {
     return (
@@ -15,6 +17,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
+                    <Route path="/dashboard" element={<Private />}>
+                        <Route index element={<Dashboard />} />
+                    </Route>
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/about" element={<About />} />
