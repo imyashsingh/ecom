@@ -51,14 +51,37 @@ const Header = () => {
                                 </NavLink>
                             </li>
                             {auth.user ? (
-                                <li className="nav-item">
-                                    <NavLink
-                                        to="/"
-                                        onClick={handleLogout}
-                                        className="nav-link"
+                                <li className="nav-item dropdown">
+                                    <button
+                                        className="btn btn dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
                                     >
-                                        Logout
-                                    </NavLink>
+                                        {auth?.user?.name}
+                                    </button>
+                                    <ul className="dropdown-menu dropdown-menu">
+                                        <li className="dropdown-item">
+                                            <NavLink
+                                                to={`/dashboard${
+                                                    auth?.user?.role === 1
+                                                        ? "/admin"
+                                                        : "/user"
+                                                }`}
+                                                className="nav-link"
+                                            >
+                                                Dashboard
+                                            </NavLink>
+                                        </li>
+                                        <li className="dropdown-item">
+                                            <NavLink
+                                                to="/"
+                                                onClick={handleLogout}
+                                                className="nav-link"
+                                            >
+                                                Logout
+                                            </NavLink>
+                                        </li>
+                                    </ul>
                                 </li>
                             ) : (
                                 <>

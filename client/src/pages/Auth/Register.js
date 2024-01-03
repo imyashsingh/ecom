@@ -11,10 +11,19 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+    const [answer, setAnswer] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log({
+                name,
+                email,
+                password,
+                phone,
+                answer,
+                address,
+            });
             const res = await axios.post(
                 `${process.env.REACT_APP_API}/api/v1/auth/register`,
                 {
@@ -22,6 +31,7 @@ const Register = () => {
                     email,
                     password,
                     phone,
+                    answer,
                     address,
                 }
             );
@@ -34,7 +44,7 @@ const Register = () => {
             }
         } catch (error) {
             console.log(error);
-            error?.response?.data
+            error?.response?.data?.message
                 ? toast.error(error.response.data.message)
                 : toast.error("somthing went wrong");
         }
@@ -125,6 +135,22 @@ const Register = () => {
                             placeholder="Enter Your address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
+                <div className="row mb-3">
+                    <label htmlFor="answer" className="col-sm-2 col-form-label">
+                        Enter your favorite show
+                    </label>
+                    <div className="col-sm-10">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="answer"
+                            placeholder="Enter Your answer"
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
                             required
                         />
                     </div>
