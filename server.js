@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 
 import authRouters from "./routes/authRoute.js";
+import categoryRouters from "./routes/categoryRoute.js";
 
 // config env
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api/v1/auth", authRouters);
+app.use("/api/v1/category", categoryRouters);
 
 app.get("/", (req, res) => {
     res.send("<h1>hello world!</h1>");

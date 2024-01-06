@@ -13,6 +13,11 @@ import Private from "./components/Routes/Private";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./components/Routes/AdminRoute";
+import CreateCategory from "./pages/admin/CreateCategory";
+import CreateProducts from "./pages/admin/CreateProducts";
+import Users from "./pages/admin/Users";
+import Profile from "./pages/user/Profile";
+import Ordres from "./pages/user/Ordres";
 
 function App() {
     return (
@@ -20,11 +25,22 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
-                    <Route path="/dashboard/user" element={<Private />}>
-                        <Route index element={<Dashboard />} />
+                    <Route path="/dashboard" element={<Private />}>
+                        <Route path="user" element={<Dashboard />} />
+                        <Route path="user/profile" element={<Profile />} />
+                        <Route path="user/ordres" element={<Ordres />} />
                     </Route>
-                    <Route path="/dashboard/admin" element={<AdminRoute />}>
-                        <Route index element={<AdminDashboard />} />
+                    <Route path="/dashboard" element={<AdminRoute />}>
+                        <Route path="admin" element={<AdminDashboard />} />
+                        <Route
+                            path="admin/create-category"
+                            element={<CreateCategory />}
+                        />
+                        <Route
+                            path="admin/create-product"
+                            element={<CreateProducts />}
+                        />
+                        <Route path="admin/users" element={<Users />} />
                     </Route>
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
