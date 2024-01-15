@@ -11,7 +11,7 @@ export const createCategoryController = async (req, res) => {
 
         if (existingCategory) {
             res.status(200).send({
-                success: true,
+                success: false,
                 message: "category already exist",
             });
         }
@@ -46,7 +46,7 @@ export const updateCategoryController = async (req, res) => {
         );
 
         if (!category) {
-            res.status(404).send({
+            res.status(200).send({
                 success: false,
                 message: "category not exist",
             });
@@ -87,7 +87,7 @@ export const singleCategoryController = async (req, res) => {
     try {
         const category = await CategoryModel.findOne({ slug: req.params.slug });
         if (!category) {
-            res.status(404).send({
+            res.status(200).send({
                 success: false,
                 message: "category not exist",
             });
