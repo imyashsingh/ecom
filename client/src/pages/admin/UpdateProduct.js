@@ -2,19 +2,43 @@ import React, { useEffect, useState } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreateProducts = () => {
+const UpdateProduct = () => {
     const navigate = useNavigate();
+    const params = useParams();
 
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState("");
+    const [id, setId] = useState("");
     const [photo, setPhoto] = useState(null);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const [shipping, setShipping] = useState(false);
+
+    //get Single Product
+
+    const getSingleProduct = async () => {
+        try {
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_API}/api/v1/product/get-product/${params.slug}`
+            );
+            if (data?.success) {
+                setId(data.product?._id);
+                setCategory(data.product?.category?.name);
+                setName(data.product?.name);
+                setDescription(data.product?.description);
+                setPrice(data.product?.price);
+                setQuantity(data.product?.quantity);
+                setShipping(data.product?.shipping);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Somthing Went Wrong In Getting Category");
+        }
+    };
 
     //get all categories
     const getAllCategory = async () => {
@@ -31,10 +55,14 @@ const CreateProducts = () => {
         }
     };
 
-    useEffect(() => getAllCategory, []);
+    useEffect(() => {
+        getAllCategory();
+        getSingleProduct();
+        // eslint-disable-next-line
+    }, []);
 
     // create product
-    const handleCreate = async () => {
+    const handleUpdate = async () => {
         try {
             const categoryID = categories.find(
                 (ele) => ele.name.toLowerCase() === category.toLowerCase()
@@ -42,14 +70,13 @@ const CreateProducts = () => {
             const productData = new FormData();
             productData.append("name", name);
             productData.append("category", categoryID._id);
-            productData.append("photo", photo);
+            photo && productData.append("photo", photo);
             productData.append("description", description);
             productData.append("price", price);
             productData.append("quantity", quantity);
             productData.append("shipping", shipping);
-
-            const { data } = await axios.post(
-                `${process.env.REACT_APP_API}/api/v1/product/create-product`,
+            const { data } = await axios.put(
+                `${process.env.REACT_APP_API}/api/v1/product/update-product/${id}`,
                 productData
             );
             if (data?.success) {
@@ -64,6 +91,24 @@ const CreateProducts = () => {
         }
     };
 
+    // Delete Product
+
+    const handleDelete = async () => {
+        try {
+            const { data } = await axios.delete(
+                `${process.env.REACT_APP_API}/api/v1/product/delete-product/${id}`
+            );
+            if (data?.success) {
+                toast.success(data?.message);
+                navigate("/dashboard/admin/products");
+            } else {
+                toast.error(data?.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("something went wrong");
+        }
+    };
     return (
         <>
             <div className="container-fluid m-3 p-3">
@@ -72,7 +117,7 @@ const CreateProducts = () => {
                         <AdminMenu />
                     </div>
                     <div className="col-md-9 text-center">
-                        <h3>Create Products</h3>
+                        <h3>Update Products</h3>
                         <div className="m-1 mt-3 ">
                             <div className="dropdown">
                                 <input
@@ -125,10 +170,19 @@ const CreateProducts = () => {
                                 </label>
                             </div>
                             <div className="mb-3">
-                                {photo && (
+                                {photo ? (
                                     <div className="text-center">
                                         <img
                                             src={URL.createObjectURL(photo)}
+                                            alt="product_photo"
+                                            height={"200px"}
+                                            className="img img-responsive"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="text-center">
+                                        <img
+                                            src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${id}`}
                                             alt="product_photo"
                                             height={"200px"}
                                             className="img img-responsive"
@@ -207,9 +261,17 @@ const CreateProducts = () => {
                             <div className="mb-3">
                                 <button
                                     className="btn btn-primary"
-                                    onClick={() => handleCreate()}
+                                    onClick={() => handleUpdate()}
                                 >
-                                    CREATE PRODUCT
+                                    UPDATE PRODUCT
+                                </button>
+                            </div>
+                            <div className="mb-3">
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() => handleDelete()}
+                                >
+                                    DELETE PRODUCT
                                 </button>
                             </div>
                         </div>
@@ -220,4 +282,4 @@ const CreateProducts = () => {
     );
 };
 
-export default CreateProducts;
+export default UpdateProduct;
