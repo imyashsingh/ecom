@@ -11,17 +11,21 @@ export const createProductController = async (req, res) => {
         //validation
         switch (true) {
             case !name:
-                return res.status(500).send({ error: "Name is required" });
+                return res.status(500).send({ message: "Name is required" });
             case !description:
                 return res
                     .status(500)
-                    .send({ error: "Description is required" });
+                    .send({ message: "Description is required" });
             case !price:
-                return res.status(500).send({ error: "Price is required" });
+                return res.status(500).send({ message: "Price is required" });
             case !category:
-                return res.status(500).send({ error: "Category is required" });
+                return res
+                    .status(500)
+                    .send({ message: "Category is required" });
             case !quantity:
-                return res.status(500).send({ error: "Quantity is required" });
+                return res
+                    .status(500)
+                    .send({ message: "Quantity is required" });
             case !photo && photo.size > 1000:
                 return res.status(500).send({
                     error: "Photo is required and should be less than 1MB",
