@@ -35,7 +35,7 @@ const Products = () => {
                         <h3>All Products </h3>
                         <div className="d-flex flex-wrap">
                             {products.map((p) => (
-                                <Link to={`${p.slug}`} key={p._id}>
+                                <Link to={`${p._id}`} key={p._id}>
                                     <div
                                         className="card m-2"
                                         style={{ width: "18rem" }}

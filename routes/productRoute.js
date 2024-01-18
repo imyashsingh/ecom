@@ -8,9 +8,12 @@ import {
     deleteProductController,
     getProduuctController,
     getSingleProduuctController,
+    productCategoryController,
     productCountController,
     productFiltersController,
     productListController,
+    realtedProductController,
+    searchProductController,
     updateProductController,
 } from "../controllers/productController.js";
 
@@ -34,7 +37,7 @@ router.put(
 
 router.get("/get-product", getProduuctController);
 
-router.get("/get-product/:slug", getSingleProduuctController);
+router.get("/get-product/:pid", getSingleProduuctController);
 
 router.get("/product-photo/:pid", ProductPhotoController);
 
@@ -43,6 +46,13 @@ router.post("/product-filters", productFiltersController);
 router.get("/product-count", productCountController);
 
 router.get("/product-list/:page", productListController);
+
+router.get("/search/:keyword", searchProductController);
+
+router.get("/related-product/:pid/:cid", realtedProductController);
+
+//category wise product
+router.get("/product-category/:slug", productCategoryController);
 
 router.delete("/delete-product/:pid", deleteProductController);
 

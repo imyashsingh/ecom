@@ -6,7 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProduct = () => {
     const navigate = useNavigate();
-    const params = useParams();
+
+    const { pid } = useParams();
 
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState("");
@@ -23,7 +24,7 @@ const UpdateProduct = () => {
     const getSingleProduct = async () => {
         try {
             const { data } = await axios.get(
-                `${process.env.REACT_APP_API}/api/v1/product/get-product/${params.slug}`
+                `${process.env.REACT_APP_API}/api/v1/product/get-product/${pid}`
             );
             if (data?.success) {
                 setId(data.product?._id);
