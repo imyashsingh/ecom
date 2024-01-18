@@ -117,3 +117,8 @@ main {
 .cursorpoint {
     cursor: pointer;
 }
+
+.product-link {
+    text-decoration: none !important;
+    color: black !important;
+}

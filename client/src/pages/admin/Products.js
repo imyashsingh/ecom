@@ -52,6 +52,11 @@ const Products = () => {
                                             <p className="card-text">
                                                 {p.description}
                                             </p>
+                                            <p>
+                                                <strong className="card-text">
+                                                    ${p.price}
+                                                </strong>
+                                            </p>
                                         </div>
                                     </div>
                                 </Link>

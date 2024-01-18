@@ -186,3 +186,70 @@ export const updateProductController = async (req, res) => {
         });
     }
 };
+
+export const productFiltersController = async (req, res) => {
+    try {
+        const { checked, radio } = req.body;
+        let args = {};
+        if (checked.length) args.category = checked;
+        if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+        const products = await productModel.find(args);
+        res.status(200).send({
+            success: true,
+            message: "Product Filtered Successfully",
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error While Getting Filter Product",
+            error,
+        });
+    }
+};
+
+export const productCountController = async (req, res) => {
+    try {
+        const total = await productModel.find({}).estimatedDocumentCount();
+
+        res.status(200).send({
+            success: true,
+            message: "Product Counted Successfully",
+            total,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error While Getting Product Count",
+            error,
+        });
+    }
+};
+
+export const productListController = async (req, res) => {
+    try {
+        const perPage = 8;
+        const page = req.params.page ? req.params.page : 1;
+        const products = await productModel
+            .find({})
+            .select("-photo")
+            .skip((page - 1) * perPage)
+            .limit(perPage)
+            .sort({ createdAt: -1 });
+
+        res.status(200).send({
+            success: true,
+            message: "Product Per Page Successfully",
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error While Getting Per Page Product",
+            error,
+        });
+    }
+};
