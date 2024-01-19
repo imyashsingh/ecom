@@ -82,7 +82,7 @@ const HomePage = () => {
     useEffect(() => {
         getTotal();
         getAllCategory();
-        if (!checked.length || !radio.length) getAllProducts();
+        if (checked.length === 0 && radio.length === 0) getAllProducts();
         // eslint-disable-next-line
     }, [checked.length, radio.length, page]);
 
@@ -199,14 +199,17 @@ const HomePage = () => {
                         ))}
                     </div>
                     <div className="text-center p-3">
-                        {products && products.length < total && (
-                            <button
-                                className="btn btn-warning"
-                                onClick={() => setPage(page + 1)}
-                            >
-                                {loading ? "Loading" : "Load More"}
-                            </button>
-                        )}
+                        {checked.length === 0 &&
+                            radio.length === 0 &&
+                            products &&
+                            products.length < total && (
+                                <button
+                                    className="btn btn-warning"
+                                    onClick={() => setPage(page + 1)}
+                                >
+                                    {loading ? "Loading" : "Load More"}
+                                </button>
+                            )}
                     </div>
                 </div>
             </div>

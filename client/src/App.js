@@ -15,9 +15,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./components/Routes/AdminRoute";
 import CreateCategory from "./pages/admin/CreateCategory";
 import CreateProducts from "./pages/admin/CreateProducts";
-import Users from "./pages/admin/Users";
 import Profile from "./pages/user/Profile";
-import Ordres from "./pages/user/Ordres";
 import Products from "./pages/admin/Products";
 import UpdateProduct from "./pages/admin/UpdateProduct";
 import Search from "./pages/user/Search";
@@ -25,6 +23,8 @@ import ProductDetails from "./pages/ProductDetails";
 import CategoryProduct from "./pages/CategoryProduct";
 import Categories from "./pages/Categories";
 import CartPage from "./pages/CartPage";
+import Orders from "./pages/user/Orders";
+import AdminOrders from "./pages/admin/AdminOrders";
 
 function App() {
     return (
@@ -35,7 +35,7 @@ function App() {
                     <Route path="/dashboard" element={<Private />}>
                         <Route path="user" element={<Dashboard />} />
                         <Route path="user/profile" element={<Profile />} />
-                        <Route path="user/ordres" element={<Ordres />} />
+                        <Route path="user/orders" element={<Orders />} />
                     </Route>
                     <Route path="/dashboard" element={<AdminRoute />}>
                         <Route path="admin" element={<AdminDashboard />} />
@@ -52,7 +52,8 @@ function App() {
                             element={<UpdateProduct />}
                         />
                         <Route path="admin/products" element={<Products />} />
-                        <Route path="admin/users" element={<Users />} />
+
+                        <Route path="admin/orders" element={<AdminOrders />} />
                     </Route>
                     <Route path="/categories" element={<Categories />} />
                     <Route
