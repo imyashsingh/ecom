@@ -55,9 +55,7 @@ const CartPage = () => {
         }
     };
 
-    useEffect(() => {
-        if (clientToken.length === 0) getToken();
-    }, [clientToken]);
+    useEffect(() => getToken, []);
 
     // handle payments
     const handlePayment = async () => {
@@ -122,7 +120,7 @@ const CartPage = () => {
                                     </div>
                                     <div className="col-md-4">
                                         <strong>{p.name}</strong>
-                                        <p>{p.description.substring(0, 30)}</p>
+                                        <p>{p?.description?.substr(0, 25)}</p>
                                         <strong>Price : ${p.price}</strong>
                                     </div>
                                     <div className="col-md-4 cart-remove-btn mt-4">
