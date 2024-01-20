@@ -31,7 +31,11 @@ const CreateProducts = () => {
         }
     };
 
-    useEffect(() => getAllCategory, []);
+    useEffect(() => {
+        if (categories.length === 0) {
+            getAllCategory();
+        }
+    }, [categories]);
 
     // create product
     const handleCreate = async () => {

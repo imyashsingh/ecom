@@ -88,7 +88,7 @@ const AdminOrders = () => {
                                                     {status.map((e, i) => (
                                                         <li
                                                             key={i}
-                                                            className="dropdown-item"
+                                                            className="dropdown-item cursorpoint"
                                                             onClick={() => {
                                                                 handleChange(
                                                                     o._id,
