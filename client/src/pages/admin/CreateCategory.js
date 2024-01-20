@@ -87,7 +87,11 @@ const CreateCategory = () => {
         }
     };
 
-    useEffect(() => getAllCategory, []);
+    useEffect(() => {
+        if (categories.length === 0) {
+            getAllCategory();
+        }
+    }, [categories]);
 
     return (
         <>

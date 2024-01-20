@@ -22,7 +22,11 @@ const Products = () => {
             toast.error("something went wrong");
         }
     };
-    useEffect(() => getAllProducts, []);
+    useEffect(() => {
+        if (products.length === 0) {
+            getAllProducts();
+        }
+    }, [products]);
 
     return (
         <>
