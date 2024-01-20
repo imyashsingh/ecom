@@ -17,7 +17,11 @@ connectDb();
 const app = express();
 
 //middleware
-app.use(cors({ origin: process.env.CLIENT_URL }));
+app.use(
+    cors({
+        origin: "https://watchecom.netlify.app",
+    })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 
