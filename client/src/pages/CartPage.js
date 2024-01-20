@@ -55,7 +55,11 @@ const CartPage = () => {
         }
     };
 
-    useEffect(() => getToken, []);
+    useEffect(() => {
+        if (clientToken.length === 0) {
+            getToken();
+        }
+    }, [clientToken]);
 
     // handle payments
     const handlePayment = async () => {
