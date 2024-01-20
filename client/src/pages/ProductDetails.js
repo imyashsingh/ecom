@@ -41,7 +41,11 @@ const ProductDetails = () => {
         }
     };
     //eslint-disable-next-line
-    useEffect(() => getProduct, []);
+    useEffect(() => {
+        if (Object.keys(product).length === 0) {
+            getProduct();
+        }
+    }, []);
 
     return (
         <>
