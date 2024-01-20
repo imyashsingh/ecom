@@ -59,6 +59,8 @@ const Profile = () => {
                         <UserMenu />
                     </div>
                     <div className="col-md-9">
+                        <h1 className="text-center">Update Profile</h1>
+                        <hr />
                         <div className="text-center h-100">
                             <form
                                 className="w-50 m-auto p-5"

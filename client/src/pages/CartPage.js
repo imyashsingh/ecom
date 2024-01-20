@@ -108,7 +108,7 @@ const CartPage = () => {
                 </div>
                 <div className="container ">
                     <div className="row ">
-                        <div className="col-md-7  p-0 m-0">
+                        <div className="col-md-7 ">
                             {cart?.map((p) => (
                                 <div className="row card flex-row" key={p._id}>
                                     <div className="col-md-4">
@@ -125,7 +125,7 @@ const CartPage = () => {
                                         <p>{p.description.substring(0, 30)}</p>
                                         <strong>Price : ${p.price}</strong>
                                     </div>
-                                    <div className="col-md-4 cart-remove-btn">
+                                    <div className="col-md-4 cart-remove-btn mt-4">
                                         <button
                                             className="btn btn-danger"
                                             onClick={() =>
@@ -187,7 +187,7 @@ const CartPage = () => {
                                     )}
                                 </div>
                             )}
-                            <div className="mt-2">
+                            <div className="mt-3 mb-3">
                                 {!clientToken ||
                                 !auth?.token ||
                                 !cart?.length ? (

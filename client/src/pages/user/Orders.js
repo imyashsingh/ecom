@@ -29,6 +29,7 @@ const Orders = () => {
                 </div>
                 <div className="col-md-9">
                     <h1 className="text-center">All Orders</h1>
+                    <hr />
                     {orders?.map((o, i) => {
                         return (
                             <div className="border shadow" key={o._id}>
